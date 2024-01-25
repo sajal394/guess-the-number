@@ -24,6 +24,19 @@ document.querySelector('.check').addEventListener('click', function () {
   if (!guess) {
     document.querySelector('.message').textContent = 'No Number Entered';
 
+    //when the entered number is different
+  } else if (guess !== secretNumber) {
+    if (score > 1) {
+      document.querySelector('.message').textContent =
+        guess > secretNumber ? 'Too High' : 'Too Low';
+      score--;
+      document.querySelector('.score').textContent = score;
+      document.querySelector('.guess').value = '';
+    } else {
+      document.querySelector('.message').textContent =
+        "You've used all your tries";
+      document.querySelector('.score').textContent = 0;
+    }
     //when player wins
   } else if (guess === secretNumber) {
     document.querySelector('.message').textContent = 'Correct Number!';
@@ -34,32 +47,6 @@ document.querySelector('.check').addEventListener('click', function () {
     if (score > highScore) {
       highScore = score;
       document.querySelector('.highscore').textContent = highScore;
-    }
-
-    //when player enter a number higher than the secret number
-  } else if (guess > secretNumber) {
-    if (score > 1) {
-      document.querySelector('.message').textContent = 'number is too high';
-      score--;
-      document.querySelector('.score').textContent = score;
-      document.querySelector('.guess').value = '';
-    } else {
-      document.querySelector('.message').textContent =
-        "You've used all your tries";
-      document.querySelector('.score').textContent = 0;
-    }
-
-    //when player enter a number lower than the secret number
-  } else if (guess < secretNumber) {
-    if (score > 1) {
-      document.querySelector('.message').textContent = 'number is too low';
-      score--;
-      document.querySelector('.score').textContent = score;
-      document.querySelector('.guess').value = '';
-    } else {
-      document.querySelector('.message').textContent =
-        "You've used all your tries";
-      document.querySelector('.score').textContent = 0;
     }
   }
 });
